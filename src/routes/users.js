@@ -7,8 +7,13 @@ const generateToken = require('../utils/generateToken');
 const router = Router();
 
 router.get('/me', (req, res) => {
-  res.send('hello');
+  if (req.user) {
+    res.send(req.user);
+  } else {
+    res.status(401).send({ message: 'Unauthorized User' });
+  }
 });
+
 
 router.post('/', (req, res) => {
   const bodySchema = {

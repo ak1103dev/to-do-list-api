@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 const routes = require('./routes');
+const auth = require('./middlewares/auth');
 
 const app = express();
 const port = config.get('port');
@@ -17,6 +18,7 @@ mongoose.connect(config.get('mongoUrl'), {
 app.use(morgan('dev'));
 app.use(cors())
 app.use(bodyParser.json());
+app.use(auth);
 app.use('/', routes);
 
 app.listen(port , () => console.log(`listen on port ${port}`));
