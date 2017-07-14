@@ -1,0 +1,17 @@
+{
+  "name": "to-do-list-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ak1103dev/to-do-list-api.git",
+  "author": "ak1103dev <ak.apichan1103@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "config": "^1.26.1",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.2"
+  },
+  "scripts": {
+    "start": "node src/app.js"
+  }
+}
