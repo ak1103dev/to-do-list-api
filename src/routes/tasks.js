@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/', (req, res) => {
   if (req.user) {
-    return Task.find()
+    return Task.find({ userId: req.user._id })
       .then((tasks) => res.send(tasks));
   }
   return res.status(401).send({ message: 'Unauthorized User' });
