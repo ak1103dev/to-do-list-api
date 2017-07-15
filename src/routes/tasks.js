@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/', (req, res) => {
   if (req.user) {
-    return Task.find({ userId: req.user._id })
+    return Task.find({ userId: req.user._id }).select('-userId -__v')
       .then((tasks) => res.send(tasks));
   }
   return res.status(401).send({ message: 'Unauthorized User' });
@@ -44,8 +44,11 @@ router.put('/:id', (req, res) => {
   }
   const body = Joi.validate(req.body, bodySchema);
   const params = Joi.validate(req.params, paramsSchema);
-  if (body.error || params.error) {
-    return res.status(400).send(error);
+  if (params.error) {
+    return res.status(400).send(params.error);
+  }
+  if (body.error) {
+    return res.status(400).send(body.error);
   }
   const { text, status } = body.value;
   const { id } = params.value;
